@@ -18,6 +18,15 @@ st.markdown("Upload a **grayscale image** and let the AI colorize it!")
 # ── Load model ────────────────────────────────────────
 @st.cache_resource
 def load_model():
+    import gdown
+    import os
+    if not os.path.exists('generator_final.keras'):
+        with st.spinner('Downloading model... please wait'):
+            gdown.download(
+                'https://drive.google.com/uc?id=10qZoCgi1ZrZ0gG9haY25UR8akxAEP4p_',
+                'generator_final.keras',
+                quiet=False
+            )
     model = tf.keras.models.load_model('generator_final.keras')
     return model
 
