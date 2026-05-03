@@ -20,8 +20,8 @@ st.markdown("Upload a **grayscale image** and let the AI colorize it!")
 def load_model():
     import gdown
     import os
-    import keras   # ✅ same level as others
-    
+    import tensorflow as tf
+
     if not os.path.exists('generator_final.keras'):
         with st.spinner('Downloading model... please wait'):
             gdown.download(
@@ -30,11 +30,10 @@ def load_model():
                 quiet=False
             )
 
-    model = keras.models.load_model(
+    model = tf.keras.models.load_model(
         'generator_final.keras',
         compile=False
     )
-
     return model
 
 generator = load_model()
